@@ -1,0 +1,38 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="{{ box.label }}">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" />
+        <ActionItem tap="{{ onEditBox }}" ios.position="right" android.position="actionBar">
+            <Label text="Edit" class="p-2" />
+        </ActionItem>
+    </ActionBar>
+
+    <ScrollView>
+        <StackLayout class="p-4">
+            <Label text="{{ box.label }}" class="text-2xl font-bold mb-2" />
+            <Label text="{{ box.room }}" class="text-lg text-gray-600 mb-4" />
+            
+            <GridLayout rows="auto" columns="*, *" class="mb-4">
+                <Button text="Add Photo" tap="{{ onTakePhoto }}" class="mr-1" />
+                <Button text="Print Label" tap="{{ onPrintLabel }}" col="1" class="ml-1" />
+            </GridLayout>
+
+            <Label text="Photos" class="text-lg font-bold mb-2" />
+            <ScrollView orientation="horizontal" class="mb-4">
+                <StackLayout orientation="horizontal">
+                    <Repeater items="{{ box.photos }}">
+                        <Repeater.itemTemplate>
+                            <Image src="{{ $value }}" width="150" height="150" 
+                                   class="rounded-lg mr-2" tap="{{ $parent.onPhotoTap }}" />
+                        </Repeater.itemTemplate>
+                    </Repeater>
+                </StackLayout>
+            </ScrollView>
+
+            <Label text="Description" class="text-lg font-bold mb-2" />
+            <Label text="{{ box.description }}" textWrap="true" class="mb-4" />
+
+            <Label text="Notes" class="text-lg font-bold mb-2" />
+            <Label text="{{ box.notes }}" textWrap="true" class="mb-4" />
+        </StackLayout>
+    </ScrollView>
+</Page>
